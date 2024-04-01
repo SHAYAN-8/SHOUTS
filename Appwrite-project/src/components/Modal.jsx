@@ -22,7 +22,7 @@ const useModal = (title, content) => {
   const ModalComponent = () => (
     <Modal
       title={title}
-      visible={modalState.visible}
+      open={modalState.visible}
       onOk={handleOk}
       onCancel={handleCancel}
       footer={null}

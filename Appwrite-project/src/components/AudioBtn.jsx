@@ -14,7 +14,7 @@ const AudioBtn = ({ text }) => {
     if ("speechSynthesis" in window) {
       const synthesis = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 1.5;
+      utterance.rate = 1.2;
       synthesis.speak(utterance);
 
       utterance.onend = () => {

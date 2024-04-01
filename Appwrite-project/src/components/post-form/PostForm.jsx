@@ -19,6 +19,7 @@ const PostForm = ({ post }) => {
         slug: post?.$id || "",
         content: post?.content || "",
         status: post?.status || "Post Normal",
+        likes: post?.likes || [],
       },
     });
 
@@ -73,6 +74,7 @@ const PostForm = ({ post }) => {
           data.email = email;
         }
         data.time = time;
+
         const dbPost = await appwriteService.createPost({
           ...data,
           userId: userData.$id,

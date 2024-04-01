@@ -22,6 +22,7 @@ import useTime from "./post-form/time";
 import ProfileToast from "./ProfileToast";
 import AuthorPost from "./AuthorPost";
 import AudioBtn from "./AudioBtn";
+import LikeBtn from "./LikeBtn";
 
 export {
   Header,
@@ -48,4 +49,5 @@ export {
   ProfileToast,
   AuthorPost,
   AudioBtn,
+  LikeBtn,
 };

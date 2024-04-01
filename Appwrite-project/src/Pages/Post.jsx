@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FaUserSecret } from "react-icons/fa";
 import { BiArrowBack } from "react-icons/bi";
 import appwriteService from "../Appwrite/config";
@@ -10,6 +9,7 @@ import {
   ProfileToast,
   AuthorPost,
   AudioBtn,
+  LikeBtn,
 } from "../components/index";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
@@ -18,16 +18,16 @@ import toast from "react-hot-toast";
 const Post = () => {
   const [post, setPost] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(post && post.likes.length);
   const [more, setMore] = useState([]);
   const { slug } = useParams();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
 
   const isAuthor = post && userData ? post.userId === userData.$id : false;
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const findId = (arr, str) => {
+    return arr.includes(str);
+  };
 
   useEffect(() => {
     if (userData) {
@@ -47,15 +47,20 @@ const Post = () => {
   }, [userData, post]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (slug) {
       appwriteService.getPost(slug).then((post) => {
-        if (post) setPost(post);
-        else navigate("/");
+        if (post) {
+          setPost(post);
+          const find = findId(post.likes, userData.$id);
+          setLikeCount(post.likes.length);
+          setIsLiked(find);
+        } else navigate("/");
       });
     } else {
       navigate("/");
     }
-  }, [slug, navigate]);
+  }, [, slug, navigate]);
 
   const profile = () => {
     toast.custom((t) => (
@@ -66,6 +71,21 @@ const Post = () => {
         email={post.email}
       />
     ));
+  };
+
+  const handleLikes = async () => {
+    if (post) {
+      const updatedLikes = isLiked
+        ? post.likes.filter((id) => id !== userData.$id)
+        : [...post.likes, userData.$id];
+
+      setIsLiked((prev) => !prev);
+      setLikeCount(!isLiked ? post.likes.length + 1 : post.likes.length - 1);
+      const dbPost = await appwriteService.updatePost(post.$id, {
+        ...post,
+        likes: updatedLikes,
+      });
+    }
   };
 
   return post ? (
@@ -107,19 +127,11 @@ const Post = () => {
                 <h2 className="text-gray-500 leading-4">{post.time}</h2>
               </div>
             </div>
-            <span className="flex flex-col items-center">
-              <button
-                className="text-red-500 text-3xl"
-                onClick={() => setIsLiked((prev) => !prev)}
-              >
-                {isLiked ? (
-                  <AiFillHeart className="animate-ping-short" />
-                ) : (
-                  <AiOutlineHeart />
-                )}
-              </button>
-              {isLiked ? post.likes.length + 1 : post.likes.length}
-            </span>
+            <LikeBtn
+              isLiked={isLiked}
+              likeCount={likeCount}
+              handleLikes={handleLikes}
+            />
           </div>
           <br />
           {isAuthor && <AuthorPost id={post.$id} image={post.featuredImage} />}
