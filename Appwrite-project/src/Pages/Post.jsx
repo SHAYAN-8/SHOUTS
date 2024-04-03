@@ -10,6 +10,7 @@ import {
   AuthorPost,
   AudioBtn,
   LikeBtn,
+  ShareBtn,
 } from "../components/index";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
@@ -53,8 +54,8 @@ const Post = () => {
         if (post) {
           setPost(post);
           const find = findId(post.likes, userData.$id);
-          setLikeCount(post.likes.length);
           setIsLiked(find);
+          setLikeCount(post.likes.length);
         } else navigate("/");
       });
     } else {
@@ -80,7 +81,14 @@ const Post = () => {
         : [...post.likes, userData.$id];
 
       setIsLiked((prev) => !prev);
-      setLikeCount(!isLiked ? post.likes.length + 1 : post.likes.length - 1);
+      const find = findId(post.likes, userData.$id);
+      setLikeCount(
+        !isLiked && !find
+          ? post.likes.length + 1
+          : isLiked && find
+          ? post.likes.length - 1
+          : post.likes.length
+      );
       const dbPost = await appwriteService.updatePost(post.$id, {
         ...post,
         likes: updatedLikes,
@@ -121,17 +129,27 @@ const Post = () => {
                 )}
               </span>
               <div>
-                <h2 className="font-semibold">
+                <h2 className="font-semibold line-clamp-1">
                   {isAuthor ? "You" : post.username}
                 </h2>
-                <h2 className="text-gray-500 leading-4">{post.time}</h2>
+                <h2 className="text-gray-500  text-sm leading-4  ">
+                  {post.time}
+                </h2>
               </div>
             </div>
-            <LikeBtn
-              isLiked={isLiked}
-              likeCount={likeCount}
-              handleLikes={handleLikes}
-            />
+            <div className="flex gap-1 sm:gap-2 items-start">
+              <ShareBtn
+                imageUrl={appwriteService.getFilePreview(post.featuredImage)}
+                title={post.title}
+                text={post.content.replace(/<[^>]*>|&nbsp;|<br\s*\/?>/g, "")}
+              />
+
+              <LikeBtn
+                isLiked={isLiked}
+                likeCount={likeCount}
+                handleLikes={handleLikes}
+              />
+            </div>
           </div>
           <br />
           {isAuthor && <AuthorPost id={post.$id} image={post.featuredImage} />}

@@ -98,13 +98,13 @@ const Footer = () => {
         <hr className="my-6 sm:mx-auto border-gray-700 lg:my-8" />
         <div className="sm:flex text-center sm:items-center sm:justify-between">
           <span className="text-sm sm:text-center text-gray-500">
-            © 2024 SHOUTS™. All Rights Reserved. Created by{" "}
+            © 2024 SHOUTS™. All Rights Reserved. Developed by{" "}
             <a
               target="_blank"
-              href="https://msprogrammers.netlify.app/"
+              href="https://shayan.netlify.app/"
               className="text-gray-300 hover:underline whitespace-nowrap hover:text-gray-100"
             >
-              M&S PROGRAMMERS
+              SHAYAN
             </a>
           </span>
           <div className="flex gap-4 sm:gap-2 text-2xl w-full sm:w-auto mt-4 justify-center sm:mt-0">

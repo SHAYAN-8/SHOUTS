@@ -23,6 +23,7 @@ import ProfileToast from "./ProfileToast";
 import AuthorPost from "./AuthorPost";
 import AudioBtn from "./AudioBtn";
 import LikeBtn from "./LikeBtn";
+import ShareBtn from "./ShareBtn";
 
 export {
   Header,
@@ -50,4 +51,5 @@ export {
   AuthorPost,
   AudioBtn,
   LikeBtn,
+  ShareBtn,
 };

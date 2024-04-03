@@ -20,9 +20,6 @@ const App = () => {
           dispatch(logout());
         }
       })
-      .catch((error) => {
-        console.error("Error fetching current user:", error);
-      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -34,7 +31,7 @@ const App = () => {
       <div className="min-h-screen flex flex-wrap content-between ">
         <div className="w-full block">
           <Header />
-          <main className="min-h-96 flex items-center justify-center">
+          <main className="min-h-96 flex items-center justify-center bg-white">
             <Outlet />
           </main>
           <Footer />
