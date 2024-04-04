@@ -10,7 +10,7 @@ import { Logo } from "../index";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 ">
+    <footer className="bg-gray-900 absolute w-full">
       <div className="mx-auto w-full max-w-screen-xl px-3 py-4 sm:p-4  lg:py-6">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
@@ -109,21 +109,31 @@ const Footer = () => {
           </span>
           <div className="flex gap-4 sm:gap-2 text-2xl w-full sm:w-auto mt-4 justify-center sm:mt-0">
             <a
+              title="Facebook"
               target="_blank"
               href="https://facebook.com/profile.php?id=100094010756930"
             >
               <FaFacebookSquare className="text-gray-400 cursor-pointer hover:text-cyan-300" />
             </a>
-            <a target="_blank" href="https://linkedin.com/in/ms-programmers">
+            <a
+              title="LinkedIn"
+              target="_blank"
+              href="https://linkedin.com/in/ms-programmers"
+            >
               <FaLinkedin className="text-gray-400 cursor-pointer hover:text-cyan-300" />
             </a>
             <a
+              title="Whatsapp"
               target="_blank"
               href="https://api.whatsapp.com/send?phone=923213991664"
             >
               <FaWhatsapp className="text-gray-400 cursor-pointer hover:text-cyan-300" />
             </a>
-            <a target="_blank" href="https://github.com/SHAYAN-8">
+            <a
+              title="Github"
+              target="_blank"
+              href="https://github.com/SHAYAN-8"
+            >
               <FaGithub className="text-gray-400 cursor-pointer hover:text-cyan-300" />
             </a>
           </div>

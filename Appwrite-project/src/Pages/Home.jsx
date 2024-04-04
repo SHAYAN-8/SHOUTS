@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Container } from "../components/index";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -12,23 +12,23 @@ const Home = () => {
   const name = useSelector((state) => state.auth.userData?.name);
   const status = useSelector((state) => state.auth.status);
   return (
-    <div className="w-full pb-8">
-      <div className="area">
-        <ul className="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
+    <div className="w-full">
+      <div className="area pb-12">
+        <div className="circles">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
       <Container>
-        <div className="container mx-auto flex flex-col items-center px-4 pb-10 pt-12 sm:py-16 text-center md:py-24 md:px-10 lg:px-32 xl:max-w-3xl">
+        <div className="container mx-auto flex flex-col  items-center px-4 pb-10 pt-12 sm:py-16 text-center md:py-24 md:px-10 lg:px-32 xl:max-w-3xl">
           <h1 className="text-4xl text-gray-700 font-bold leading-none sm:text-5xl ">
             <span className="text-cyan-400 capitalize ">
               {" "}
