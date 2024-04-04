@@ -9,25 +9,22 @@ const ShareBtn = ({ imageUrl, title, text }) => {
         const blob = await fetch(imageUrl).then((res) => res.blob());
         await navigator.share({
           title: title,
-          text: text,
+          text: `${title}\n${text}`, // Including title and text for Web Share API
           url: window.location.href,
           files: [new File([blob], "image.png", { type: "image/png" })],
         });
       } else if (/WhatsApp/.test(navigator.userAgent)) {
-        // Check if the user agent indicates WhatsApp
         const whatsappMessage = encodeURIComponent(
           `${title}\n${text}\n${imageUrl}`
         );
         const whatsappUrl = `whatsapp://send?text=${whatsappMessage}`;
         window.location.href = whatsappUrl;
       } else if (/Facebook/.test(navigator.userAgent)) {
-        // Check if the user agent indicates Facebook
         const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
           window.location.href
-        )}&quote=${encodeURIComponent(title)}`;
+        )}&quote=${encodeURIComponent(title + "\n" + text)}`; // Including title and text for Facebook
         window.open(facebookUrl, "_blank");
       } else {
-        // Fallback for other platforms
         window.open(window.location.href, "_blank");
       }
     } catch (error) {
