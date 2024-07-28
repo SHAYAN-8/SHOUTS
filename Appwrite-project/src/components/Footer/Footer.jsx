@@ -55,7 +55,7 @@ const Footer = () => {
                 <li className="mb-4">
                   <a
                     target="_blank"
-                    href="https://linkedin.com/in/ms-programmers/"
+                    href="https://www.linkedin.com/in/muhammad~shayan//"
                     className="hover:underline "
                   >
                     LinkedIn
@@ -118,7 +118,7 @@ const Footer = () => {
             <a
               title="LinkedIn"
               target="_blank"
-              href="https://linkedin.com/in/ms-programmers"
+              href="https://www.linkedin.com/in/muhammad~shayan/"
             >
               <FaLinkedin className="text-gray-400 cursor-pointer hover:text-cyan-300" />
             </a>
